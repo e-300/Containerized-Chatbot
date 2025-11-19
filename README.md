@@ -1,5 +1,6 @@
-# DevOps Assistant MVP
-A containerized AI assistant specialized in DevOps, cloud infrastructure, and platform engineering topics. 
+# Devloper Assistant MVP
+A containerized AI assistant specialized in reading codebases, code security, and software design.
+This AI assistant is designed to help developers when they encounter a new codebase, it will traverse through the code base and provide a detailed explanation to the developer what the codebase consists of, potential security concerns and what the code is doing all from a cli chat interface.  
 Built with production-ready practices including monitoring, CI/CD automation, and container orchestration.
 
 
@@ -12,7 +13,7 @@ The surrounding infrastructure of this project aims for production ready softwar
 ## Tech Stack
 - **Runtime**: Python 3.10.12
 - **API Framework**: FastAPI
-- **LLM**: OpenAI 
+- **LLM**: Antropic
 - **Containerization**: Docker, Docker Compose
 - **Monitoring**: Prometheus, Grafana
 - **CI/CD**: GitHub Actions

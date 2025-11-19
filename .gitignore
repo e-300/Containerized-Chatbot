@@ -1,18 +1,31 @@
-# Environment variables
-.env
+#Virtual environments
+.venv/
+venv/
+env/
+ENV/
 
-# Python cache
+#Python cache
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 
-# Virtual environment
-venv/
-env/
+#Environment variables / secrets
+.env
+.env.local
 
-# IDE settings
+#IDE / editor junk
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# OS files
+#OS junk
 .DS_Store
+Thumbs.db
+
+#build artifacts 
+dist/
+build/
+*.egg-info/
+
