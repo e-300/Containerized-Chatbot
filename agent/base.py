@@ -1,6 +1,5 @@
-# This is the base interface that will act as the AI platform
-# Next we will create an ai client that will be the implmentation of that interface
-
+#LAYER 1 - ABSTRACT BASE CLASS
+#base interface that will act as the AI platform -> AI client will be the implementation of the interface
 
 from abc import ABC, abstractmethod
 
@@ -12,3 +11,4 @@ class AI_Platform(ABC):
     @abstractmethod
     def process(self, user_input: str) -> str:
         pass
+

@@ -1,3 +1,5 @@
+#LAYER 2 - AI client implementing the abs base class
+
 from anthropic import Anthropic, APIError
 from anthropic.types import TextBlock
 from agent.base import AI_Platform
@@ -5,15 +7,18 @@ from agent.base import AI_Platform
 
 class AnthropicAgent(AI_Platform):
 
+    #parameterized constructor 
     def __init__(self, api_key: str, system_prompt: str | None):
 
         self.api_key = api_key
+        # intial prompt for aglinning the ai behavior should be inputted here 
+        # maybe add some startup behaviors such as target a codebase 
         self.system_prompt = system_prompt or "You are a helpful developer assistant."
         self.client = Anthropic(api_key=self.api_key)
         self.model = "claude-3-5-haiku-latest"
 
 
-
+    #helper function to extract text according to cluade api bc they be expecting various i/o
     def _extract_text(self, response) -> str:
         texts = [
             block.text
@@ -24,11 +29,9 @@ class AnthropicAgent(AI_Platform):
         return "\n".join(texts) if texts else "No text response returned."
 
 
-
+    #low lvl wrapper around the raw antropic msgs api
     def chat(self, prompt: str) -> str:
-        """
-        Low-level wrapper around the Anthropic Messages API.
-        """
+
         try:
             response = self.client.messages.create(
                 model=self.model,
@@ -45,16 +48,10 @@ class AnthropicAgent(AI_Platform):
             return f"Unexpected error: {str(e)}"
         
 
+    #high lvl wrapper - our production concerns 
+    #need to add: logging, metrics, security filters, rate limiting, and redis caching
     def process(self, user_input: str) -> str:
-        """
-        High-level method used by your CLI / API layer.
-        This is where you add:
-        - logging
-        - metrics
-        - security filters
-        - rate limiting
-        - caching (later with Redis)
-        """
+
         if not user_input or not user_input.strip():
             return "Input is empty."
 
