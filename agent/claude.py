@@ -39,13 +39,13 @@ class AnthropicAgent(AI_Platform):
             self.redis_enabled = False
 
      
-    
-    def _generate_cache_key(self, user_input:str) -> str:      
-        """Generate a deterministic cache key from user input"""  
-        # Include system prompt in hash for unique caching per configuration
-        cache_string = f"{self.system_prompt}:{user_input}"
-        return f"agent_cache:{hashlib.sha256(cache_string.encode()).hexdigest()}"
 
+    # Generate redis caching key    
+    def _generate_cache_key(self, user_input: str) -> str:      
+        cache_string = f"{self.system_prompt}:{user_input}"
+        hash_result = hashlib.sha256(cache_string.encode()).hexdigest()
+        result = f"agent_cache:{hash_result}"
+        return result
 
 
     #helper function to extract text according to cluade api bc they be expecting various i/o
@@ -84,11 +84,10 @@ class AnthropicAgent(AI_Platform):
         if not user_input or not user_input.strip():
             return "Input is empty."
         try:
-            # Check Redis cache if enabled
+            #Check Redis cache if enabled
             if self.redis_enabled:
-                #print("DEBUG: About to generate cache key")
+
                 cache_key = self._generate_cache_key(user_input)
-                #print(f"DEBUG: Cache key generated: {cache_key}")
                 
                 try:
                     cached_response = self.redis_client.get(cache_key)
@@ -99,13 +98,14 @@ class AnthropicAgent(AI_Platform):
 
                 except (redis.RedisError, AttributeError, NameError) as e:
                     print(f"Redis GET error: {e}. Proceeding without cache.")
+
                     # Disable Redis for this instance if connection is broken
                     self.redis_enabled = False
             
-            # Cache miss or Redis disabled - call LLM
+            # cache miss or Redis disabled - call llm 
             response = self.chat(user_input)
             
-            # Store in Redis cache if enabled and response is valid
+            #store in Redis cache if enabled and response is valid
             if self.redis_enabled and response and not response.startswith("Anthropic API error"):
                 try:
                     self.redis_client.setex(cache_key, 3600, response)
