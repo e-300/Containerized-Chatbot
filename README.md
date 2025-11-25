@@ -1,4 +1,4 @@
-# AI Chatbot with Production Infrastructure#
+# AI Chatbot with Production Infrastructure
   A production-ready Containerized AI chatbot built with Claude API, featuring Redis caching, comprehensive observability with Prometheus/Grafana, and automated CI/CD pipelines. 
 
   My goal for this Project was to learn and demonstrate enterprise level software engineering practices like:
@@ -14,7 +14,7 @@
   Production Thinking: Design decisions made for scalability and maintainability
 
 
-# Getting Started! #
+# Getting Started!
 
 1) Clone Repo
    git clone https://github.com/eb-300/ai-agent-mvp.git
@@ -23,10 +23,10 @@
 2) Configure Environment Variables
    create .env file in project root 
     
-   # Required
+   Required
      ANTHROPIC_API_KEY=your_anthropic_api_key_here
 
-   # Optional (defaults provided)
+   Optional (defaults provided)
      REDIS_HOST=redis
      REDIS_PORT=6379
 
@@ -40,15 +40,15 @@
       Grafana: Dashboard on http://localhost:3000
 
 4) Verify Installation 
-   # Check agent health
-   curl http://localhost:8000/health
-   # Expected: {"status": "healthy"}
+   Check agent health
+    curl http://localhost:8000/health
+    Expected: {"status": "healthy"}
    
-   # Check Prometheus targets
-   curl http://localhost:9090/-/healthy
-   # Expected: Prometheus is Healthy.
+   Check Prometheus targets
+    curl http://localhost:9090/-/healthy
+    Expected: Prometheus is Healthy.
 
-   # Grafana Dashboard #
+   Grafana Dashboard #
     http://localhost:3000
 
     Credentials -> admin/admin
@@ -62,11 +62,11 @@
 6) Clean up:
     docker-compose down
 
-    # Remove containers, networks, and volumes
-    docker-compose down -v
+    Remove containers, networks, and volumes
+     docker-compose down -v
     
-    # Remove images
-    docker-compose down --rmi all
+    Remove images
+     docker-compose down --rmi all
     
 
 
@@ -85,7 +85,7 @@
 
 
 
-# Tech Stack #
+# Tech Stack 
   Runtime: Python 3.10.12
   API Framework: FastAPI with Pydantic validation
   LLM Provider: Anthropic Claude (Haiku 3.5)
@@ -99,7 +99,7 @@
 
 
 
-# Architecture Overview #
+# Architecture Overview 
 
    ┌─────────────┐
    │   Client    │
@@ -136,7 +136,7 @@
 
 
 
-# Three-Layer Architecture #
+# Three-Layer Architecture 
   Layer 1: Abstract Interface (agent/base.py)
   
            Abstract AI_Platform interface 
@@ -160,7 +160,7 @@
            Health Check for Endpoint for container Orchestration
 
 
-# Features #
+# Features 
 
   Core Functionality
   
@@ -205,7 +205,7 @@
 
 
 
-## Project Status
+# Project Status
   Stage 1 is Complete
 - [x] **Project structure and planning**
 - [x] **Core agent implementation**
@@ -220,7 +220,7 @@
 Next Stage is Kubernetes Deployment With a Proper Use Case that allows horizonal Scaling
 
 
-# CI/CD Pipeline #
+# CI/CD Pipeline 
 The pipeline runs on every push and pull request to main and develop branches.
 Pipeline Stages:
 
@@ -244,7 +244,7 @@ Pipeline Stages:
 
 
 
-# What I learned #
+# What I learned 
   Building this project taught me:
   Infrastructure & DevOps:
   
@@ -275,11 +275,11 @@ Pipeline Stages:
   Type hints for code clarity
 
 
-# License #
+# License 
 MIT
 
 
-# ChangeLog #
+# ChangeLog 
 v1.0.0 (11-24-2025)
 
 ✨ Initial MVP release

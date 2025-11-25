@@ -12,7 +12,7 @@ import time
 
 load_dotenv()
 
-
+# FASTAPI REQUEST MODEL
 class ChatRequest(BaseModel):
     message: str
 
@@ -79,7 +79,7 @@ async def chat(req: ChatRequest):
         # Track successful request
         request_count.labels(status="success").inc()
 
-        # Check if response came from cache (simple heuristic)
+        # Check if response came from cache 
         # You could enhance agent.process() to return this info
         if "error" in response.lower() or "api error" in response.lower():
             error_count.labels(error_type="api_error").inc()
@@ -99,13 +99,6 @@ async def chat(req: ChatRequest):
         duration = time.time() - start_time
         response_time.observe(duration)
 
-
-# @app.post("/chat")
-# async def chat(req: ChatRequest):
-
-#     response = agent.process(req.message)
-
-#     return {"response": response}
 
 
 @app.get("/health")

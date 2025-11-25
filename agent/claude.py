@@ -72,12 +72,18 @@ class AnthropicAgent(AI_Platform):
             return f"Anthropic API error: {str(e)}"
         except Exception as e:
             return f"Unexpected error: {str(e)}"
+        
+
+
+
 
     # high lvl wrapper - our production concerns
     # need to add: logging, metrics, security filters, rate limiting, and redis caching
     def process(self, user_input: str) -> str:
         if not user_input or not user_input.strip():
             return "Input is empty."
+        
+
         try:
             # Check Redis cache if enabled
             if self.redis_enabled:
@@ -89,11 +95,14 @@ class AnthropicAgent(AI_Platform):
                     if cached_response is not None and isinstance(cached_response, str):
                         return str(cached_response)
 
+
                 except (redis.RedisError, AttributeError, NameError) as e:
                     print(f"Redis GET error: {e}. Proceeding without cache.")
 
                     # Disable Redis for this instance if connection is broken
                     self.redis_enabled = False
+
+
 
             # cache miss or Redis disabled - call llm
             response = self.chat(user_input)
