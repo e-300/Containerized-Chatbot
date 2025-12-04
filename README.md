@@ -16,7 +16,7 @@ My goal for this Project was to learn and demonstrate enterprise level software 
 
 ### 1. Clone Repo
 ```bash
-git clone https://github.com/e-300/Containerized-Agentic-Platform
+git clone https://github.com/e-300/Containerized-Chatbot
 cd ai-agent-mvp
 ```
 
